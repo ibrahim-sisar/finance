@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-start">Symbol</th>
+            <th class="text-end">Shares</th>
+            <th class="text-end">Price</th>
+            <th class="text-end">TOTAL</th>
+        </tr>
+    </thead>
+   <tbody>
+        {% for i,z in data[1] %}
+            <tr>
+                <td class="text-start">{{i.name}}</td>
+                <td class="text-end">{{i.shares}}</td>
+                <td class="text-end">${{z}}</td>
+                <td class="text-end">${{z * i.shares}}</td>
+            </tr>
+        {% endfor %}
+
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="3">Cash</td>
+            <td class="border-0 text-end">{{data[0][0].cash|round(2)}}</td>
+        </tr>
+        <tr>
+            <td class="border-0 fw-bold text-end" colspan="3">TOTAL</td>
+            <td class="border-0 w-bold text-end">${{data[2]+data[0][0].cash|round(2)}}</td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock %}
